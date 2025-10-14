@@ -12,17 +12,23 @@ public class AuthService {
     public AuthService(){
 
         users = new ArrayList<>();
-        users.add(new User("prof1", "pass123", "PROFESSOR"));
-        users.add(new User("ta1", "pass123", "TA"));
-        users.add(new User("student1", "pass123", "STUDENT"));
+        users.add(new User("Professor", "passprof", "Professor"));
+        users.add(new User("Ta1", "passta1", "TA"));
+        users.add(new User("Ta2", "passta2", "TA"));
+        users.add(new User("Student1", "passstudent1", "Student"));
+        users.add(new User("Student2", "passstudent2", "Student"));
+        users.add(new User("Student3", "passstudent3", "Student"));
+        users.add(new User("Student4", "passstudent4", "Student"));
+        users.add(new User("Student5", "passstudent5", "Student"));
     }
 
-    public boolean validateUser(String username, String password){
+    // Validate user details
+    public User validateUser(String username, String password) {
         for (User user : users) {
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                return true;
+                return user;
             }
         }
-        return false;
+        return null;
     }
 }

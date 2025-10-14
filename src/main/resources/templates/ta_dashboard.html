@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>TA Dashboard</title>
+</head>
+<body>
+    <h1>Welcome, <span th:text="${username}"></span> (TA)</h1>
+    <p>This is a placeholder dashboard for teaching assistants.</p>
+    
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">Logout</button>
+    </form>
+</body>
+</html>
