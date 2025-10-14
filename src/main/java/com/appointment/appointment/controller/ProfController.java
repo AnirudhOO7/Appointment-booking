@@ -1,5 +1,6 @@
 package com.appointment.appointment.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -7,6 +8,7 @@ import com.appointment.appointment.model.User;
 
 import jakarta.servlet.http.HttpSession;
 
+@Controller
 public class ProfController {
     @GetMapping("/professor_dashboard")
     public String professor_dashboard_session(HttpSession session, Model model) {

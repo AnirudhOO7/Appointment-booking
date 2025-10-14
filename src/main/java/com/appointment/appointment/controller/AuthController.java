@@ -51,18 +51,7 @@ public class AuthController{
 }
     }
 
-    //endpoint to handle professor dashboard
-    @GetMapping("/professor_dashboard")
-    public String professor_dashboard_session(HttpSession session, Model model) {
-        User user = (User) session.getAttribute("loggedInUser");
-        if (user == null || !user.getRole().equals("Professor")) {
-            model.addAttribute("error", "Access denied. Please log in as a professor.");
-            return "login";
-        }
-        model.addAttribute("username", user.getUsername());
-        return "professor_dashboard";
-    }
-
+  
     //endpoint to handle logout
     @PostMapping("/logout")
     public String logout(HttpSession session, Model model) {
