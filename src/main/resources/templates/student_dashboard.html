@@ -1,14 +1,18 @@
-<!DOCTYPE html>
+<!Doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Student Dashboard</title>
+    <title>Dashboard</title>
 </head>
 <body>
-    <h1>Welcome, <span th:text="${username}"></span> (Student)</h1>
-    <p>This is a placeholder dashboard for students.</p>
-    
-    <form th:action="@{/logout}" method="post">
-        <button type="submit">Logout</button>
-    </form>
+<h1>Welcome, <span th:text="${username}"></span></h1>
+<form th:action="@{/student/book-groups}" method="get">
+    <button type="submit">Book Groups</button>
+</form>
+<form th:action="@{/student/view-groups}" method="get">
+    <button type="submit">View Groups</button>
+</form>
+<form th:action="@{/logout}" method="post">
+    <button type="submit">Logout</button>
+</form>
 </body>
 </html>

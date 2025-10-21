@@ -5,7 +5,12 @@
 </head>
 <body>
 <h1>Welcome, <span th:text="${username}"></span></h1>
-<p>Just a placeholder Dashboard for Professor.</p>
+<form th:action="@{/professor/create-groups}" method="get">
+    <button type="submit">Create Groups</button>
+</form>
+<form th:action="@{/professor/view-groups}" method="get">
+    <button type="submit">View Groups</button>
+</form>
 <form th:action="@{/logout}" method="post">
     <button type="submit">Logout</button>
 </form>

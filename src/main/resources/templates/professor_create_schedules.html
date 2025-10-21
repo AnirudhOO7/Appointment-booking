@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Professor Creation of Schedules</title>
+</head>
+<body>
+<h1>Create a new appointment Schedules</h1>
+
+<form th:action="@{/professor/create-groups}" method="post">
+
+    <label for="groupType">Appointment Type</label><br><br>
+
+    <label for ="option1">
+        <input type ="radio" id="option1" name="groupType" value="Individual" required>
+        Individual
+    </label><br>
+
+    <label for ="option2">
+        <input type ="radio" id="option2" name="groupType" value="Group" required>
+        Group
+    </label><br><br>
+
+
+
+    <label for="appName">Appointment Name:</label>
+    <input type="text" id="appName" name="appName" required><br><br>
+
+    <label for="appDate">Appointment Date:</label>
+    <input type="date" id="appDate" name="appDate" required><br><br>
+
+    <label for="startTime">Start Time:</label>
+    <input type="time" id="startTime" name="startTime" required><br><br>
+
+    <label for="endTime">End Time:</label>
+    <input type="time" id="endTime" name="endTime" required><br><br>
+
+    <label for="slotDuration">Slot Duration (minutes):</label>
+    <input type="number" id="slotDuration" name="slotDuration" required><br><br>
+
+    <button type="submit">Create Schedule</button>
+
+</form>
+
+<form th:action="@{/professor_dashboard}" method="get">
+    <button type="submit">Back to Dashboard</button><br>
+</body>
+</html>

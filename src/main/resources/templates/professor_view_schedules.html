@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Professor View Schedules</title>
+</head>
+<table border="1">
+    <tr>
+        <th>Group Type</th>
+        <th>Appointment Name</th>
+        <th>Appointment Date</th>
+        <th>Slot Start</th>
+        <th>Slot End</th>
+        <th>Max Capacity</th>
+        <th>Current Capacity</th>
+    </tr>
+
+    <th:block th:each="group : ${groups}">
+        <tr th:each="slot : ${group.timeSlots}">
+            <td th:text="${group.groupType}"></td>
+            <td th:text="${group.appName}"></td>
+            <td th:text="${slot.appDate}"></td>
+            <td th:text="${slot.startTime}"></td>
+            <td th:text="${slot.endTime}"></td>
+            <td th:text="${group.maxCapacity}"></td>
+            <td th:text="${slot.currentCapacity}"></td>
+        </tr>
+    </th:block>
+    
+</table>
+
+<form th:action="@{/professor_dashboard}" method="get">
+        <button type="submit">Back to Dashboard</button><br>
+</form>
+</body>
+</html>
