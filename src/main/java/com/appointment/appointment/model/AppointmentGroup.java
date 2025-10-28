@@ -20,9 +20,9 @@ public class AppointmentGroup {
     private LocalDate appDate; 
     private LocalTime startTime; 
     private LocalTime endTime; 
-    private Integer slotDuration; 
-    private Integer maxCapacity=5;  
+    private Integer slotDuration;  
     private Integer TotalSlots;
+    private Integer maxCapacity;
 
     @OneToMany(mappedBy = "appointmentGroup", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<TimeSlots> timeSlots;

@@ -12,5 +12,7 @@ public interface AppointmentGroupRepository extends JpaRepository<AppointmentGro
     
         @Query("SELECT DISTINCT g FROM AppointmentGroup g LEFT JOIN FETCH g.timeSlots")
         List<AppointmentGroup> findAllWithSlots();
+
+        
 }
 

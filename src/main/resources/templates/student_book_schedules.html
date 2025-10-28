@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Professor View Schedules</title>
+    <title>Student Book Schedules</title>
 </head>
+<body>
+<p th:if="${success}" th:text="${success}" style="color:green;"></p>
+<p th:if="${error}" th:text="${error}" style="color:red;"></p>
+
+<h1>Available Appointment Groups and Time Slots</h1>
+<form th:action="@{/student/book-groups}" method="post">
 <table border="1">
     <tr>
         <th>Group Type</th>
@@ -11,6 +17,7 @@
         <th>Slot Start</th>
         <th>Slot End</th>
         <th>Capacity</th>
+        <th>Book Slot</th>
     </tr>
 
     <th:block th:each="group : ${groups}">
@@ -21,12 +28,25 @@
             <td th:text="${slot.startTime}"></td>
             <td th:text="${slot.endTime}"></td>
             <td th:text="${slot.currentCapacity} + '/' + ${group.maxCapacity}"></td>
+            <td>
+                <th:block th:if="${slot.currentCapacity < group.maxCapacity}">
+                    <input type="radio" name="timeSlotId" th:value="${slot.id}" required>
+                </th:block>
+                <th:block th:if="${slot.currentCapacity >= group.maxCapacity}">
+                    <span style="color:red">Full</span>
+                </th:block>
+            </td>
         </tr>
     </th:block>
     
 </table>
 
-<form th:action="@{/professor_dashboard}" method="get">
+    <br>
+    <button type="submit">Book Selected Slot</button>
+
+</form>
+
+<form th:action="@{/student_dashboard}" method="get">
         <button type="submit">Back to Dashboard</button><br>
 </form>
 </body>

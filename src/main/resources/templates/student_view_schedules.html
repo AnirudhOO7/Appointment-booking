@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Professor View Schedules</title>
+    <title>Student View Schedules</title>
 </head>
+<body>
+<h1>Available Appointment Groups and Time Slots</h1>
 <table border="1">
     <tr>
         <th>Group Type</th>
@@ -11,6 +13,7 @@
         <th>Slot Start</th>
         <th>Slot End</th>
         <th>Capacity</th>
+        <th>Status</th>
     </tr>
 
     <th:block th:each="group : ${groups}">
@@ -21,12 +24,23 @@
             <td th:text="${slot.startTime}"></td>
             <td th:text="${slot.endTime}"></td>
             <td th:text="${slot.currentCapacity} + '/' + ${group.maxCapacity}"></td>
+            <td>
+                <th:block th:if="${userBooking.contains(slot.id)}">
+                    <span style="color:green">Booked</span>
+                </th:block>
+                <th:block th:if="${!userBooking.contains(slot.id)}">
+                    <span style="color:blue">Available</span>
+                </th:block>
+                <th:block th:if="${slot.currentCapacity >= group.maxCapacity}">
+                    <span style="color:red">Full</span>
+                </th:block>
+            </td>
         </tr>
     </th:block>
     
 </table>
 
-<form th:action="@{/professor_dashboard}" method="get">
+<form th:action="@{/student_dashboard}" method="get">
         <button type="submit">Back to Dashboard</button><br>
 </form>
 </body>

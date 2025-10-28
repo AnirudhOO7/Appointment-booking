@@ -25,13 +25,17 @@ public class AppointmentGroupService {
     }
 
 
-    
+
     public List<AppointmentGroup> getALLGroups(){
         return appointmentGroupRepository.findAllWithSlots();
     }
 
     public AppointmentGroup getGroupById(Long id){
         return appointmentGroupRepository.findById(id).orElse(null);
+    }
+
+    public void deleteGroupById(Long id) {
+        appointmentGroupRepository.deleteById(id);
     }
 }
     

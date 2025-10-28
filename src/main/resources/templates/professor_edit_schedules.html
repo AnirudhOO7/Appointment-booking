@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Professor View Schedules</title>
+    <title>Professor Edit Schedules</title>
 </head>
 <table border="1">
     <tr>
@@ -10,18 +10,21 @@
         <th>Appointment Date</th>
         <th>Slot Start</th>
         <th>Slot End</th>
-        <th>Capacity</th>
+        <th>Edit</th>
     </tr>
 
     <th:block th:each="group : ${groups}">
-        <tr th:each="slot : ${group.timeSlots}">
+        <tr>
             <td th:text="${group.groupType}"></td>
             <td th:text="${group.appName}"></td>
-            <td th:text="${slot.appDate}"></td>
-            <td th:text="${slot.startTime}"></td>
-            <td th:text="${slot.endTime}"></td>
-            <td th:text="${slot.currentCapacity} + '/' + ${group.maxCapacity}"></td>
-        </tr>
+            <td th:text="${group.appDate}"></td>
+            <td th:text="${group.startTime}"></td>
+            <td th:text="${group.endTime}"></td>
+            <td>
+                <form th:action="@{/professor/edit-groups/{id}(id=${group.id})}" method="get">
+                    <button type="submit">Edit Group</button><br>
+                </form>
+            </td>
     </th:block>
     
 </table>
