@@ -161,7 +161,11 @@ public class ProfController {
         group.setEndTime(LocalTime.parse(endTime));
         group.setSlotDuration(slotDuration);
         group.setMaxCapacity(groupType.equals("Individual")?1:maxCapacity);
-        appointmentGroupService.saveAppointmentGroup(group);
+
+        if(group.getTimeSlots()!=null && !group.getTimeSlots().isEmpty()){
+            group.getTimeSlots().clear();
+        }
+        appointmentGroupService.updateAppointmentGroup(group);
         return "redirect:/professor/edit-groups";
     }
 

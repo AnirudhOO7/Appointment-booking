@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.appointment.appointment.model.AppointmentGroup;
-import com.appointment.appointment.model.TimeSlots;
 import com.appointment.appointment.repository.AppointmentGroupRepository;
 
 @Service
@@ -26,6 +25,9 @@ public class AppointmentGroupService {
         appointmentGroupRepository.save(appointmentGroup);
     }
 
+    public void updateAppointmentGroup(AppointmentGroup appointmentGroup){
+        appointmentGroupRepository.save(appointmentGroup);
+    }
 
 
     public List<AppointmentGroup> getALLGroups(){
@@ -37,10 +39,7 @@ public class AppointmentGroupService {
     }
 
     public void deleteGroupById(Long id) {
-        AppointmentGroup group = appointmentGroupRepository.findById(id).orElse(null);
-        if(group!=null){
-        appointmentGroupRepository.delete(group);
+        appointmentGroupRepository.deleteById(id);
     }
-}
 }
     
