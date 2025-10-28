@@ -2,8 +2,10 @@ package com.appointment.appointment.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.appointment.appointment.model.AppointmentGroup;
+import com.appointment.appointment.model.TimeSlots;
 import com.appointment.appointment.repository.AppointmentGroupRepository;
 
 @Service
@@ -35,7 +37,10 @@ public class AppointmentGroupService {
     }
 
     public void deleteGroupById(Long id) {
-        appointmentGroupRepository.deleteById(id);
+        AppointmentGroup group = appointmentGroupRepository.findById(id).orElse(null);
+        if(group!=null){
+        appointmentGroupRepository.delete(group);
     }
+}
 }
     

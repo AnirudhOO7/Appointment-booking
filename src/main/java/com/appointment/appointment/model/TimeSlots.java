@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import java.util.List;
 
 
 @Data
@@ -20,6 +21,9 @@ public class TimeSlots {
     @ManyToOne
     @JoinColumn(name = "appointment_group_id", nullable = false)
     private AppointmentGroup appointmentGroup;
+
+    @OneToMany(mappedBy = "timeSlot", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Booking> bookings;
 
     private LocalTime startTime;
     private LocalTime endTime;
