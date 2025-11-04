@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>TA Dashboard</title>
+    <title>TA View Schedules Dashboard</title>
 </head>
 <body>
-    <h1>Welcome, <span th:text="${username}"></span> (TA)</h1>
-    <p>This is a placeholder dashboard for teaching assistants.</p>
+    <h1>Ta Dashboard</h1>
+<table border="1">
+    <tr>
+        <th>Group Type</th>
+        <th>Appointment Name</th>
+        <th>Appointment Date</th>
+        <th>Slot Start</th>
+        <th>Slot End</th>
+        <th>Booking</th>
+    </tr>
+
+    <th:block th:each="group : ${groups}">
+        <tr th:each="slot : ${group.timeSlots}"
+        th:if="${slot != null && !slot.isBreak}">
+            <td th:text="${group.groupType}"></td>
+            <td th:text="${group.appName}"></td>
+            <td th:text="${slot.appDate}"></td>
+            <td th:text="${slot.startTime}"></td>
+            <td th:text="${slot.endTime}"></td>
+            <td th:text="${slot.currentCapacity}"></td>
+        </tr>
+    </th:block>
     
-    <form th:action="@{/logout}" method="post">
-        <button type="submit">Logout</button>
-    </form>
+</table>
+
+<form th:action="@{/logout}" method="post">
+        <button type="submit">Logout</button><br>
+</form>
 </body>
 </html>

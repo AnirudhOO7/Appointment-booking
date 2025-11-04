@@ -12,27 +12,25 @@
         <th>Appointment Date</th>
         <th>Slot Start</th>
         <th>Slot End</th>
-        <th>Capacity</th>
+        <th>Booking</th>
         <th>Status</th>
     </tr>
 
     <th:block th:each="group : ${groups}">
-        <tr th:each="slot : ${group.timeSlots}">
+        <tr th:each="slot : ${group.timeSlots}"
+             th:if="${slot != null && !slot.isBreak}">
             <td th:text="${group.groupType}"></td>
             <td th:text="${group.appName}"></td>
             <td th:text="${slot.appDate}"></td>
             <td th:text="${slot.startTime}"></td>
             <td th:text="${slot.endTime}"></td>
-            <td th:text="${slot.currentCapacity} + '/' + ${group.maxCapacity}"></td>
+            <td th:text="${slot.currentCapacity}"></td>
             <td>
                 <th:block th:if="${userBooking.contains(slot.id)}">
                     <span style="color:green">Booked</span>
                 </th:block>
                 <th:block th:if="${!userBooking.contains(slot.id)}">
                     <span style="color:blue">Available</span>
-                </th:block>
-                <th:block th:if="${slot.currentCapacity >= group.maxCapacity}">
-                    <span style="color:red">Full</span>
                 </th:block>
             </td>
         </tr>

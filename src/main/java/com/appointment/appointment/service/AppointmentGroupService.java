@@ -2,7 +2,6 @@ package com.appointment.appointment.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.appointment.appointment.model.AppointmentGroup;
 import com.appointment.appointment.repository.AppointmentGroupRepository;
@@ -26,7 +25,16 @@ public class AppointmentGroupService {
     }
 
     public void updateAppointmentGroup(AppointmentGroup appointmentGroup){
+
+        if(appointmentGroup.getTimeSlots() != null && !appointmentGroup.getTimeSlots().isEmpty()) appointmentGroup.getTimeSlots().clear();
+       
         appointmentGroupRepository.save(appointmentGroup);
+
+        int count = timeSlotsService.generateTimeSlots(appointmentGroup);
+        appointmentGroup.setTotalSlots(count);
+
+        appointmentGroupRepository.save(appointmentGroup);
+
     }
 
 
@@ -41,5 +49,7 @@ public class AppointmentGroupService {
     public void deleteGroupById(Long id) {
         appointmentGroupRepository.deleteById(id);
     }
+
+    
 }
     

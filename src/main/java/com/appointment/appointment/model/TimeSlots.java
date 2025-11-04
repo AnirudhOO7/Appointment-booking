@@ -30,5 +30,14 @@ public class TimeSlots {
     private LocalDate appDate;
     private Boolean isBooked = false;
     private Integer currentCapacity;
+    @Column(name = "is_break")
+    private boolean isBreak = false;
     
+    public boolean getIsBreak() {
+        return isBreak;
+    }
+
+    public void setIsBreak(boolean isBreak) {
+        this.isBreak = isBreak;
+    }
 }

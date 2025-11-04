@@ -1,10 +1,8 @@
 package com.appointment.appointment.controller;
 
-import com.appointment.appointment.model.AppointmentGroup;
 import com.appointment.appointment.model.Booking;
 import com.appointment.appointment.service.AppointmentGroupService;
 import com.appointment.appointment.service.AuthService;
-import com.appointment.appointment.controller.ProfController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,10 +15,7 @@ import com.appointment.appointment.model.User;
 import com.appointment.appointment.service.BookingService;
 
 
-import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -81,8 +76,7 @@ public class StudController {
         User user = authService.validateStudentSession(session, model);
         if (user == null) return "login";
 
-        String username = user.getUsername();
-        String bookingResult = bookingService.bookSlot(timeSlotId, username);
+        String bookingResult = bookingService.bookSlot(timeSlotId, user);
         if (bookingResult.equals("Booking Successful")){
             redirectAttributes.addFlashAttribute("success", bookingResult);
         } else {

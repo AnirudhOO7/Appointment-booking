@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import com.appointment.appointment.model.TimeSlots;
 import com.appointment.appointment.repository.TimeSlotsRepository;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class TimeSlotsService {
@@ -24,6 +26,7 @@ public class TimeSlotsService {
         LocalTime slotEndTime = group.getEndTime();
         Integer slotDuration = group.getSlotDuration();
 
+        List<TimeSlots> slots = new ArrayList<>();
 
         while(!slotStartTime.plusMinutes(slotDuration).isAfter(slotEndTime)){
             TimeSlots slot = new TimeSlots();
@@ -33,10 +36,24 @@ public class TimeSlotsService {
             slot.setAppDate(group.getAppDate());
             slot.setIsBooked(false);
             slot.setCurrentCapacity(0);
-            timeSlotsRepository.save(slot);
+            slots.add(slot);
             slotStartTime = slotStartTime.plusMinutes(slotDuration);
             count++;
         }
+
+            if (slots.size() >= 3) {
+                for (TimeSlots slot : slots) {
+                LocalTime time = slot.getStartTime();
+                if ((time.isAfter(LocalTime.of(10, 15)) && time.isBefore(LocalTime.of(10, 45))) ||
+                (time.isAfter(LocalTime.of(12, 15)) && time.isBefore(LocalTime.of(13, 15)))) {
+                slot.setIsBreak(true);
+                }
+            }
+            }
+
+            for (TimeSlots slot : slots) {
+                timeSlotsRepository.save(slot);
+            }
         return count;
     }
 

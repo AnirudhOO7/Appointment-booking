@@ -3,6 +3,7 @@
 <head>
     <title>Professor View Schedules</title>
 </head>
+<body>
 <table border="1">
     <tr>
         <th>Group Type</th>
@@ -10,17 +11,18 @@
         <th>Appointment Date</th>
         <th>Slot Start</th>
         <th>Slot End</th>
-        <th>Capacity</th>
+        <th>Bookings</th>
     </tr>
 
     <th:block th:each="group : ${groups}">
-        <tr th:each="slot : ${group.timeSlots}">
+        <tr th:each="slot : ${group.timeSlots}"
+            th:if="${slot != null && !slot.isBreak}">
             <td th:text="${group.groupType}"></td>
             <td th:text="${group.appName}"></td>
             <td th:text="${slot.appDate}"></td>
             <td th:text="${slot.startTime}"></td>
             <td th:text="${slot.endTime}"></td>
-            <td th:text="${slot.currentCapacity} + '/' + ${group.maxCapacity}"></td>
+            <td th:text="${slot.currentCapacity}"></td>
         </tr>
     </th:block>
     

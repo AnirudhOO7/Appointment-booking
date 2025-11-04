@@ -94,7 +94,6 @@ public class ProfController {
         @RequestParam("startTime") String startTime,
         @RequestParam("endTime") String endTime,
         @RequestParam("slotDuration") Integer slotDuration,
-        @RequestParam("maxCapacity") Integer maxCapacity,
         @RequestParam(value = "weeks", defaultValue = "1") Integer weeks,
         HttpSession session,
         Model model
@@ -114,7 +113,6 @@ public class ProfController {
         newGroup.setStartTime(LocalTime.parse(startTime));
         newGroup.setEndTime(LocalTime.parse(endTime));
         newGroup.setSlotDuration(slotDuration);
-        newGroup.setMaxCapacity(groupType.equals("Individual")?1:maxCapacity);
 
     
         appointmentGroupService.saveAppointmentGroup(newGroup);
@@ -145,7 +143,6 @@ public class ProfController {
     @RequestParam("startTime") String startTime,
     @RequestParam("endTime") String endTime,
     @RequestParam("slotDuration") Integer slotDuration,
-    @RequestParam("maxCapacity") Integer maxCapacity,
     HttpSession session,
     Model model
     ){
@@ -160,12 +157,12 @@ public class ProfController {
         group.setStartTime(LocalTime.parse(startTime));
         group.setEndTime(LocalTime.parse(endTime));
         group.setSlotDuration(slotDuration);
-        group.setMaxCapacity(groupType.equals("Individual")?1:maxCapacity);
 
         if(group.getTimeSlots()!=null && !group.getTimeSlots().isEmpty()){
             group.getTimeSlots().clear();
         }
         appointmentGroupService.updateAppointmentGroup(group);
+        
         return "redirect:/professor/edit-groups";
     }
 
