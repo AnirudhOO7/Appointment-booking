@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: appointment-app
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    region: oregon
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:sqlite:/app/data/appointment.db
+    disk:
+      name: appointment-data
+      mountPath: /app/data
+      sizeGB: 1
